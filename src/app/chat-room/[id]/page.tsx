@@ -42,7 +42,7 @@ export default function page({params}:pageProps){
             QuerySnapshot.forEach((message:any)=>{
                 messages.push({...message.data()})
             })
-            const uid=JSON.parse(window.localStorage.getItem('currentUser') || '')
+            const uid=(window.localStorage.getItem('currentUser') || '')
             console.log(uid)
             setMessages(messages.filter((mess)=>{
                 if((mess.person_1==uid || mess.person_1==params.id) && (mess.person_2==uid || mess.person_2==params.id)){

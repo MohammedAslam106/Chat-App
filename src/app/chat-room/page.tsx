@@ -35,14 +35,10 @@ export default function page({}:pageProps ){
                 fetchedMessages.push({ ...doc.data()});
             });
             setUsers(fetchedMessages.filter((user:any)=>{
-                console.log(user.uid,window.localStorage.getItem('currentUser'))
-                return user.uid!==JSON.parse(window.localStorage.getItem('currentUser') || '')
+                return JSON.stringify(user.uid)!==(window.localStorage.getItem('currentUser') || '')
             }));
             });
         }, []);
-    
-    const userRef=collection(db,'user')
-    const q=query(userRef,orderBy('name'))
     
     return(
         <div className=''>Chat-Room
