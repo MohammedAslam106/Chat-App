@@ -7,3 +7,55 @@
 ::after {
   box-sizing: border-box;
 }
+
+input[type='text']:focus{
+  border: none;
+}
+
+.context-menu{
+  position: absolute;
+  right: 0;
+  top: 3em;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  width: 5em;
+  transform: translateY(-.5em);
+  transition: all 0.5s ease-in-out 0s ;
+}
+
+.parent-context-menu:hover .context-menu{
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* Cool Scrollbar */
+.cool-scrollbar::-webkit-scrollbar{
+  width: .3vw;
+}
+
+.cool-scrollbar::-webkit-scrollbar-thumb{
+  background: #4a4a4a;
+  border-radius: 100vmax;
+  transition: opacity .5s ease-in-out 0s;
+}
+
+.cool-scrollbar::-webkit-scrollbar-track{
+  border-radius: 100vmax;
+  /* display: none; */
+  background-color: #888;
+}
+
+/* active link  */
+.inactive-link{
+  background: transparent;
+  color:#555555
+}
+
+.active-link{
+  background: #4a4a4a;
+  color: #fff;
+}

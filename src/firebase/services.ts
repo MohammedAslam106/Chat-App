@@ -76,12 +76,34 @@ export const SignInWithGithub=()=>{
 
         console.log(response)
         if(response.body){
-            addDoc(collection(db,'user'),{
-                name:result.user.displayName,
-                image:result.user.photoURL,
-                email:result.user.email,
-                uid:result.user.uid
+            const userColRef=collection(db,'user')
+            let users:any[]=[]
+            await getDocs(userColRef).then((result)=>{
+                result.docs.forEach((QuerySnapshot:any)=>{
+                    console.log(QuerySnapshot.data())
+                    users.push({...QuerySnapshot.data()})
+                })
+            }).catch((error)=>console.log(error))
+
+            console.log(users)
+
+            const isUserExist=users.filter((user)=>{
+                console.log(user.uid,response.body)
+                return user.uid==response.body
             })
+
+            console.log(isUserExist)
+
+            if(isUserExist.length==0){
+                addDoc(userColRef,{
+                    name:result.user.displayName,
+                    image:result.user.photoURL,
+                    email:result.user.email,
+                    uid:result.user.uid
+                }).then((resp)=>console.log('Added new user.')).catch((erro)=>console.log('Unable to add docs',erro))
+            }
+
+
             if(typeof window !==undefined){
                 window.localStorage.setItem('currentUser',JSON.stringify(response.body))
                 window.location.reload()
