@@ -201,7 +201,7 @@ export default function SideBar({}:SideBarProps ){
                         </Box>
 
                         <Box px={2} className="cool-scrollbar" h={'80%'} overflowY={'scroll'} >
-                            {dummyUser.map((user,ind)=>{
+                            {users.map((user,ind)=>{
                                 return(
                                     <Link  href={`/chat-room/${user.uid}`} key={user.uid}>
                                         <UserContainer onClick={()=>{
