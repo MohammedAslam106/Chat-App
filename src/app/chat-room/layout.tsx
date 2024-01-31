@@ -1,5 +1,7 @@
+'use client'
+
 import SideBar from "@/components/SideBar"
-import { Box, Flex } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import { ReactNode } from "react"
 
 interface layoutProps{
@@ -7,10 +9,13 @@ interface layoutProps{
 }
 
 export default function RootLayout({children}:layoutProps ){
+
     return(
         <>
-            <Box display={'grid'} gridTemplateColumns={'1fr 2fr'} justifyContent={'space-between'} w={'100%'} >
-                <SideBar/>
+            <Box className=" max-md:grid-cols-[1fr] grid-cols-[1fr,2fr]" display={'grid'}  justifyContent={'space-between'} w={'100%'} >
+                <Box className=" max-md:hidden">
+                    <SideBar/>
+                </Box>
                 <Box >
                     {children}
                 </Box>

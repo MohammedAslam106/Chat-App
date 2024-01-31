@@ -18,7 +18,7 @@ export default function UserContainer({user,className,linkRef,onClick,ind}:UserC
             <Image rounded={'100vmax'} border={'solid 1px'} alt="user profile" width={50} height={50} src={user.image}/>
             <Box >
                 <Text fontSize={'1.05rem'} fontWeight={'semibold'} >{user.name}</Text>
-                <Text fontSize={'0.8rem'}>{user.uid}</Text>
+                <Text className=" break-normal max-w-[10em] overflow-hidden text-ellipsis"  fontSize={'0.8rem'}>{user.uid}</Text>
             </Box>
         </Container>
     )

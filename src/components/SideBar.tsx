@@ -6,6 +6,8 @@ import { getDocs, getFirestore,onSnapshot,orderBy,query } from "firebase/firesto
 import { addDoc,serverTimestamp,collection } from "firebase/firestore"
 import { useEffect, useRef, useState } from "react"
 import { TbUser, TbUserCircle } from "react-icons/tb"
+import { useMediaQuery } from "@chakra-ui/react"
+
 
 interface pageProps{
     
@@ -23,6 +25,8 @@ interface SideBarProps{
 }
 
 export default function SideBar({}:SideBarProps ){
+
+    const [isSmallerThan850]=useMediaQuery('min-width:850px')
 
     const linkRef=useRef<Array<HTMLDivElement | null>>([])
     const [users,setUsers]=useState<User[]>([])
@@ -171,13 +175,15 @@ export default function SideBar({}:SideBarProps ){
         }, []);
     return(
         <>
-            <Box maxW={'640px'} left={0} top={0} bg={'blue.200'} h={'100svh'} > {/* Don't thouch this box it's main box*/}
+            {/* {isSmallerThan850 && 
+                <> */}
+            <Box className="  w-[100%]"  left={0} top={0} bg={'blue.200'} h={'100svh'} > {/* Don't thouch this box it's main box*/}
                     <Box bg={'gray.200'} shadow={'sm'} position={'relative'} transition={'all 0.1s ease-in 0s'} _hover={{bg:'gray.300',textColor:'white'}} px={6} py={4} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                             <Text zIndex={1} textColor={'black.500'} fontSize={'0.9rem'} fontWeight={'600'}>
                                 {currentUser?.name}
                             </Text>
-                            <Box className="parent-context-menu"  role="button" shadow={'md'} ringColor={'blue.500'} border={'solid 1px'} rounded={'100vmax'} overflow={'hidden'} w={'40px'} h={'40px'}>
-                                <Image objectFit="cover" unoptimized rounded={'100vmax'} borderColor={'black'} border={'solid'} alt="User Image" width={45} height={45} src={currentUser?.image}/>
+                            <Box className="parent-context-menu"  role="button"  >
+                                <Image objectFit="cover" unoptimized rounded={'100vmax'} borderColor={'black'} border={'solid'} shadow={'md'} alt="User Image" width={45} height={45} src={currentUser?.image}/>
 
                                 <Box className="context-menu" >
                                     <ul>
@@ -203,21 +209,28 @@ export default function SideBar({}:SideBarProps ){
                         <Box px={2} className="cool-scrollbar" h={'80%'} overflowY={'scroll'} >
                             {users.map((user,ind)=>{
                                 return(
-                                    <Link  href={`/chat-room/${user.uid}`} key={user.uid}>
-                                        <UserContainer onClick={()=>{
-                                            console.log(linkRef.current)
-                                            linkRef.current.forEach((item)=>{
-                                                item?.classList.replace('active-link','inactive-link')
-                                            })
-                                            linkRef.current[ind]?.classList.replace('inactive-link','active-link')
-                                    }} linkRef={linkRef} ind={ind} className="inactive-link" user={user} />
-                                    </Link>
+                                    <>
+                                        <hr/>
+                                        <Link href={`/chat-room/${user.uid}`} key={user.uid}>
+                                            <UserContainer onClick={()=>{
+                                                console.log(linkRef.current)
+                                                linkRef.current.forEach((item)=>{
+                                                    item?.classList.replace('active-link','inactive-link')
+                                                })
+                                                linkRef.current[ind]?.classList.replace('inactive-link','active-link')
+                                        }} linkRef={linkRef} ind={ind} className="inactive-link my-3" user={user} />
+                                        </Link>
+                                        <hr/>
+                                    </>
                                 )
                             })}
                         </Box>
 
 
-        </Box>  {/* Don't thouch this box it's main box*/}
+        </Box> {/* Don't thouch this box it's main box*/}
         </>
+        
+    // }  
+    //     </>
     )
 }

@@ -2,10 +2,10 @@
 
 import { query,getFirestore,collection,getDoc, onSnapshot, doc, addDoc, getDocs, serverTimestamp, DocumentData } from "firebase/firestore";
 import firebase_app from "@/firebase/config";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { User } from "@/types/user";
 import NavBar from "@/components/NavBar";
-import { Box, Button, FormControl, Input, calc } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, Input, calc } from "@chakra-ui/react";
 import { BiRightArrow } from "react-icons/bi";
 import { FaCircleRight } from "react-icons/fa6";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -213,7 +213,12 @@ export default function page({params}:pageProps){
         },
     ]
 
+    const scrollRef=useRef<HTMLDivElement | null>(null)
+
     useEffect(()=>{
+
+        scrollRef.current?.scrollIntoView({behavior:'smooth'})
+
         const getUserDetails=()=>{
             const colRef=collection(db,'user')
             getDocs(colRef).then((result)=>{
@@ -255,6 +260,8 @@ export default function page({params}:pageProps){
             
                 return timestampA - timestampB;
             }))
+            scrollRef.current?.scrollIntoView({behavior:'smooth'})
+
         });
     },[])
 
@@ -266,6 +273,9 @@ export default function page({params}:pageProps){
             person_2:params.id,
             sentAt:new Date()
         })
+
+        scrollRef.current?.scrollIntoView({behavior:'smooth'})
+
         setFormValue('')
     }
     return(
@@ -273,7 +283,7 @@ export default function page({params}:pageProps){
         <>
             <NavBar secondUser={secondUser}/>
 
-            <Box bg={'gray.100'} className="cool-scrollbar" w={'100%'} overflowY={'scroll'} height={'calc(100svh - 10em)'}>
+            <Box bg={'gray.100'} position={'relative'} className="cool-scrollbar" w={'100%'} overflowY={'scroll'} height={'calc(100svh - 10em)'}>
                 {
                     messages.map((chat,ind)=>{
                         return(
@@ -281,6 +291,9 @@ export default function page({params}:pageProps){
                         )
                     })
                 }
+                
+                <Box float={'left'} bottom={0} position={'static'} ref={scrollRef}></Box>
+
             </Box>
 
             <Box  bg={'gray.200'}>

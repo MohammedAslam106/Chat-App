@@ -1,4 +1,5 @@
 'use client'
+import SideBar from "@/components/SideBar"
 import firebase_app from "@/firebase/config"
 import { Logout } from "@/firebase/services"
 import { Box, Button, Text } from "@chakra-ui/react"
@@ -18,8 +19,16 @@ const db=getFirestore(firebase_app)
 export default function page({}:pageProps ){
     
     return(
-        <Box bg={'gray.200'} w={'100%'} h={'100svh'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-            <Image width={250} height={250} src={'/Chat_Logo.svg'} alt="Chat-Logo"/>
-        </Box>
+        <>
+            {/* Large Devices */}
+            <Box className="max-md:hidden  flex" bg={'gray.200'} w={'100%'} h={'100svh'} justifyContent={'center'} alignItems={'center'}>
+                <Image width={250} height={250} src={'/Chat_Logo.svg'} alt="Chat-Logo"/>
+            </Box>
+        
+            {/* Smaller Devices */}
+            <Box className=" hidden max-md:block">
+                <SideBar/>
+            </Box>
+        </>
     )
 }
