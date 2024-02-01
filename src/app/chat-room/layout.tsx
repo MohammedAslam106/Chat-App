@@ -4,17 +4,17 @@ import SideBar from "@/components/SideBar"
 import { Box } from "@chakra-ui/react"
 import { ReactNode } from "react"
 
-interface layoutProps{
-    children:ReactNode
+interface layoutProps {
+    children: ReactNode
 }
 
-export default function RootLayout({children}:layoutProps ){
+export default function RootLayout({ children }: layoutProps) {
 
-    return(
+    return (
         <>
-            <Box className=" max-md:grid-cols-[1fr] grid-cols-[1fr,2fr]" display={'grid'}  justifyContent={'space-between'} w={'100%'} >
-                <Box className=" max-md:hidden">
-                    <SideBar/>
+            <Box className=" chat-room-partioner" display={'grid'} justifyContent={'space-between'} w={'100%'} >
+                <Box className=" md-side-bar">
+                    <SideBar />
                 </Box>
                 <Box h={'100svh'}>
                     {children}

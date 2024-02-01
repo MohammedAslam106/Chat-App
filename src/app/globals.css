@@ -14,8 +14,8 @@ input[type='text']:focus{
 
 .context-menu{
   position: absolute;
-  right: 0;
-  top: 3em;
+  right: 1em;
+  top: 4em;
   z-index: 10;
   visibility: hidden;
   opacity: 0;
@@ -58,4 +58,43 @@ input[type='text']:focus{
 .active-link{
   background: #4a4a4a;
   color: #fff;
+}
+
+/* Media Queries */
+
+.chat-room-partioner{
+  grid-template-columns: 1fr 2fr;
+}
+
+.chat-room-logo{
+  display: flex ;
+}
+
+.chat-room-sidebar{
+  display: none;
+}
+
+@media not all and (min-width: 640px) {
+  .login-page {
+      flex-direction: column;
+  }
+
+  .chat-container{
+    font-size: 0.8rem;
+  }
+}
+
+@media not all and (min-width: 768px) {
+  .chat-room-partioner {
+      grid-template-columns: 1fr;
+  }
+
+  .md-side-bar, .chat-room-logo{
+    display: none;
+  }
+
+  .chat-room-sidebar{
+    display: block;
+  }
+
 }

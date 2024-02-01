@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const path=request.nextUrl.pathname
     const isPublicPath=path==='/' 
     const token=request.cookies.get('uid')
-    console.log(token)
+    // console.log(token)
     if(isPublicPath && token){
         return NextResponse.redirect(new URL('/chat-room',request.nextUrl))
     }

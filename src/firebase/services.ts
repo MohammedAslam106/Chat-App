@@ -13,7 +13,7 @@ const auth=getAuth(firebase_app)
 
 export const SinginWithGoogle=()=>{
     signInWithPopup(auth,GoogleProvider).then(async(result)=>{
-        console.log(result.user.uid)
+        // console.log(result.user.uid)
         const response=await (await fetch('/api/handle-signin',{
             method:'POST',
             body:JSON.stringify(result.user.uid),
@@ -22,25 +22,25 @@ export const SinginWithGoogle=()=>{
             }
         })).json()
 
-        console.log(response)
+        // console.log(response)
         if(response.body){
             const userColRef=collection(db,'user')
             let users:any[]=[]
             await getDocs(userColRef).then((result)=>{
                 result.docs.forEach((QuerySnapshot:any)=>{
-                    console.log(QuerySnapshot.data())
+                    // console.log(QuerySnapshot.data())
                     users.push({...QuerySnapshot.data()})
                 })
             }).catch((error)=>console.log(error))
 
-            console.log(users)
+            // console.log(users)
 
             const isUserExist=users.filter((user)=>{
-                console.log(user.uid,response.body)
+                // console.log(user.uid,response.body)
                 return user.uid==response.body
             })
 
-            console.log(isUserExist)
+            // console.log(isUserExist)
 
             if(isUserExist.length==0){
                 addDoc(userColRef,{
@@ -65,7 +65,7 @@ export const SinginWithGoogle=()=>{
 
 export const SignInWithGithub=()=>{
     signInWithPopup(auth,GithubProvider).then(async(result)=>{
-        console.log(result.user.uid)
+        // console.log(result.user.uid)
         const response=await (await fetch('/api/handle-signin',{
             method:'POST',
             body:JSON.stringify(result.user.uid),
@@ -74,25 +74,25 @@ export const SignInWithGithub=()=>{
             }
         })).json()
 
-        console.log(response)
+        // console.log(response)
         if(response.body){
             const userColRef=collection(db,'user')
             let users:any[]=[]
             await getDocs(userColRef).then((result)=>{
                 result.docs.forEach((QuerySnapshot:any)=>{
-                    console.log(QuerySnapshot.data())
+                    // console.log(QuerySnapshot.data())
                     users.push({...QuerySnapshot.data()})
                 })
             }).catch((error)=>console.log(error))
 
-            console.log(users)
+            // console.log(users)
 
             const isUserExist=users.filter((user)=>{
-                console.log(user.uid,response.body)
+                // console.log(user.uid,response.body)
                 return user.uid==response.body
             })
 
-            console.log(isUserExist)
+            // console.log(isUserExist)
 
             if(isUserExist.length==0){
                 addDoc(userColRef,{
@@ -125,7 +125,7 @@ export const Logout=()=>{
             }
         })).json()
 
-        console.log(response)
+        // console.log(response)
         if(response){
             if(typeof window !==undefined){
                 window.localStorage.removeItem('currentUser')
