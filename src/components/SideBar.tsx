@@ -206,7 +206,7 @@ export default function SideBar({}:SideBarProps ){
 
                         </Box>
 
-                        <Box px={2} className="cool-scrollbar" h={'calc(100vh - 160px)'} overflowY={'scroll'} >
+                        <Box px={2} className="cool-scrollbar" h={'calc(100svh - 160px)'} overflowY={'scroll'} >
                             {dummyUser.map((user,ind)=>{
                                 return(
                                     <>
