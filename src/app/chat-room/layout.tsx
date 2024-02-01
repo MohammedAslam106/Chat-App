@@ -16,7 +16,7 @@ export default function RootLayout({children}:layoutProps ){
                 <Box className=" max-md:hidden">
                     <SideBar/>
                 </Box>
-                <Box >
+                <Box h={'100svh'}>
                     {children}
                 </Box>
             </Box>

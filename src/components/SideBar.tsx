@@ -141,6 +141,7 @@ export default function SideBar({}:SideBarProps ){
             uid: 'hjIrEijs2kNqaMPLvfU0ZZ2KPqq2'
           }
     ]
+
     useEffect(() => {
 
         linkRef
@@ -177,7 +178,7 @@ export default function SideBar({}:SideBarProps ){
         <>
             {/* {isSmallerThan850 && 
                 <> */}
-            <Box className="  w-[100%]"  left={0} top={0} bg={'blue.200'} h={'100svh'} > {/* Don't thouch this box it's main box*/}
+            <Box w={'100%'} h={'100svh'} overflow={'hidden'} bg={'blue.200'}> {/* Don't thouch this box it's main box*/}
                     <Box bg={'gray.200'} shadow={'sm'} position={'relative'} transition={'all 0.1s ease-in 0s'} _hover={{bg:'gray.300',textColor:'white'}} px={6} py={4} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                             <Text zIndex={1} textColor={'black.500'} fontSize={'0.9rem'} fontWeight={'600'}>
                                 {currentUser?.name}
@@ -206,8 +207,8 @@ export default function SideBar({}:SideBarProps ){
 
                         </Box>
 
-                        <Box px={2} className="cool-scrollbar" h={'calc(100svh - 160px)'} overflowY={'scroll'} >
-                            {dummyUser.map((user,ind)=>{
+                        <Box px={2} className="cool-scrollbar" h={'calc(100svh - 150px)'} overflowY={'scroll'} >
+                            {users.map((user,ind)=>{
                                 return(
                                     <>
                                         <hr/>

@@ -281,9 +281,10 @@ export default function page({params}:pageProps){
     return(
         
         <>
+
             <NavBar secondUser={secondUser}/>
 
-            <Box bg={'gray.100'} position={'relative'} className="cool-scrollbar" w={'100%'} overflowY={'scroll'} height={'calc(100svh - 10em)'}>
+            <Box bg={'gray.100'} position={'relative'} className="cool-scrollbar" w={'100%'} overflowY={'scroll'} height={'calc(100svh - 160px)'}>
                 {
                     messages.map((chat,ind)=>{
                         return(
