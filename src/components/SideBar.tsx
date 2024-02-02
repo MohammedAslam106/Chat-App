@@ -246,7 +246,18 @@ export default function SideBar({}: SideBarProps) {
                   loading: { title: "Invitation Pending",
                   description: "Your invitation is in queue. Sit tight while we process the request. We'll notify you once it's sent!",position:'top'  },
               })
-            response.then(res=>res.json()).then(re=>{if(re.id)onClose()})
+            response.then((res)=>{if(res.status==200){return res.json()}else {throw new Error(res.statusText)}}).then(re=>{if(re.id)onClose()}).catch((error)=>{
+              console.log(error)
+              toast({
+                title:'Opps! Error',
+                description:error,
+                position:'top',
+                status:'error',
+                isClosable:true,
+                duration:5000
+              })
+              onClose()
+            })
           }
           }}>
         <ModalContent>
